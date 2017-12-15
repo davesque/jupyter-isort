@@ -1,11 +1,11 @@
 Type: IPython Notebook Extension
 Name: Jupyter isort
-Description: Use isort to reformat/prettify Python code cells
+Description: Use isort to sort imports in Python notebooks
 Link: README.md
 Main: jupyter-isort.js
-Compatibility: Jupyter (4.x) 
+Compatibility: Jupyter (4.x)
 Parameters:
-- name: code_format_hotkey 
-  description: Hotkey to call the code prettify
+- name: code_sort_hotkey
+  description: Hotkey to call the import sorter
   input_type: text
-  default: 'Ctrl-L'
+  default: 'Alt-S'

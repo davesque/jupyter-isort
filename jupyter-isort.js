@@ -14,12 +14,12 @@ define(function (require, exports, module) {
     var replace_in_cell = false; //bool to enable/disable replacements
     var kernel_language; // language associated with kernel
 
-    var cfg = {code_format_hotkey: 'Ctrl-L'};
+    var cfg = {import_sort_hotkey: 'Alt-S'};
 
     var kernel_map = {
         python: {
             library: 'import isort',
-            exec: isort_format,
+            exec: sort_imports,
             post_exec: ''
         }
     };
@@ -35,7 +35,7 @@ define(function (require, exports, module) {
                     cfg[key] = config.data[key];
                 }
             }
-            code_format_hotkey();
+            import_sort_hotkey();
         })
     }
 
@@ -75,7 +75,7 @@ define(function (require, exports, module) {
     }
 
 
-    function isort_format(index) {
+    function sort_imports(index) {
         Jupyter.notebook.select(index);
         var selected_cell = Jupyter.notebook.get_selected_cell();
         if (selected_cell instanceof CodeCell) {
@@ -87,28 +87,28 @@ define(function (require, exports, module) {
         }
     }
 
-    function auto_format() {
+    function import_sort() {
         replace_in_cell = true;
         kernel_map[kernel_language].exec()
     }
 
 
-    function code_format_button() {
-        if ($('#code_format_button').length == 0) {
+    function import_sort_button() {
+        if ($('#import_sort_button').length == 0) {
             Jupyter.toolbar.add_buttons_group([{
-                'label': 'Code formatting',
-                'icon': 'fa-legal',
-                'callback': auto_format,
-                'id': 'code_format_button'
+                'label': 'Code import sorting',
+                'icon': 'fa-sort-amount-asc ',
+                'callback': import_sort,
+                'id': 'import_sort_button'
             }]);
         }
     }
 
-    function code_format_hotkey() {
-        add_edit_shortcuts[cfg['code_format_hotkey']] = {
-            help: "code formatting",
+    function import_sort_hotkey() {
+        add_edit_shortcuts[cfg['import_sort_hotkey']] = {
+            help: "code import sorting",
             help_index: 'isort',
-            handler: auto_format
+            handler: import_sort
         };
     }
 
@@ -116,10 +116,10 @@ define(function (require, exports, module) {
         kernel_language = Jupyter.notebook.metadata.kernelspec.language.toLowerCase();
         var knownKernel = kernel_map[kernel_language];
         if (!knownKernel) {
-            $('#code_format_button').remove();
+            $('#import_sort_button').remove();
             alert("Sorry; isort nbextension only works with a Python kernel");
         } else {
-            code_format_button();
+            import_sort_button();
             Jupyter.keyboard_manager.edit_shortcuts.add_shortcuts(add_edit_shortcuts);
             replace_in_cell = false;
             exec_code(kernel_map[kernel_language].library)
