@@ -1,0 +1,11 @@
+Type: IPython Notebook Extension
+Name: Jupyter isort
+Description: Use isort to reformat/prettify Python code cells
+Link: README.md
+Main: jupyter-isort.js
+Compatibility: Jupyter (4.x) 
+Parameters:
+- name: code_format_hotkey 
+  description: Hotkey to call the code prettify
+  input_type: text
+  default: 'Ctrl-L'
