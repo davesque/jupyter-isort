@@ -1,6 +1,6 @@
 Type: IPython Notebook Extension
 Name: Jupyter isort
-Description: Use isort to sort imports in Python notebooks
+Description: Use isort to sort imports in Python notebook cell
 Link: README.md
 Main: jupyter-isort.js
 Compatibility: Jupyter (4.x)
