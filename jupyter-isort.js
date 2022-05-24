@@ -79,7 +79,7 @@ define(function (require, exports, module) {
             var text = selected_cell.get_text();
             text = JSON.stringify(text)
                 .replace(/([^\\])\\\\\\n/g, "$1");
-            var code_input = 'isort.SortImports(file_contents=' + text + ').output';
+            var code_input = 'isort.code(' + text + ')';
             exec_code(code_input, index)
         }
     }
